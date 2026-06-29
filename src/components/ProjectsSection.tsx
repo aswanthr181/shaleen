@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ExternalLink, Github, Info, Layers, Gauge, Activity, Cpu, Box, Shield, Settings, Compass, Zap, Brain, Wrench, LineChart, BookOpen, MapPin, Award, Briefcase } from "lucide-react";
+import { useState, useRef } from "react";
+import { ExternalLink, Github, Info, Layers, Gauge, Activity, Cpu, Box, Shield, Settings, Compass, Zap, Brain, Wrench, LineChart, BookOpen, MapPin, Award, Briefcase, Play, Pause, X, Volume2, VolumeX, Maximize } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -123,6 +123,19 @@ interface Project {
     }[];
     highlights: string[];
   };
+
+  // SAE Aero Design Specific fields
+  aeroDesignDetails?: {
+    video: {
+      src: string;
+      title: string;
+    };
+    images: {
+      src: string;
+      alt: string;
+      caption: string;
+    }[];
+  };
 }
 
 const projects: Project[] = [
@@ -135,7 +148,7 @@ const projects: Project[] = [
     teamId: "Applus-IDIADA",
     institution: "Applus+ IDIADA (TATA Motors ODC) · Pune, India",
     role: "Vehicle Dynamics Engineer",
-    year: "2022–2025",
+    year: "2025",
     overview: "Spent nearly three years embedded in an OEM vehicle dynamics development programme at Applus+ IDIADA on the TATA Motors ODC, working on multi-body dynamics modelling, K&C analysis, and vehicle dynamics attribute development for passenger vehicle programmes. This role bridged CAE simulation and physical test validation across multiple platforms simultaneously.",
     professionalExperience: {
       location: "Pune, India",
@@ -200,7 +213,7 @@ const projects: Project[] = [
     team: "Individual Project",
     institution: "Clemson University (Control Systems Engineering / Automotive Safety & Stability)",
     role: "Controls Engineer",
-    year: "2021",
+    year: "2026",
     overview: "Developed Feedback Linearization (FBL) and Sliding Mode Control (SMC) algorithms for yaw-rate tracking under FMVSS 126 Sine-with-Dwell and ISO 3888-1 Double Lane Change manoeuvres. Built and validated a 7-DOF nonlinear vehicle dynamics model in MATLAB/Simulink against high-fidelity CarSim reference models.",
     highlights: [
       "Developed Feedback Linearization (FBL) and Sliding Mode Control (SMC) algorithms for yaw-rate tracking under FMVSS 126 Sine-with-Dwell and ISO 3888-1 Double Lane Change manoeuvres.",
@@ -228,7 +241,7 @@ const projects: Project[] = [
     team: "Individual Project",
     institution: "Clemson University (Vehicle Testing & Characterization)",
     role: "Data Acquisition & Analysis Lead",
-    year: "2022",
+    year: "2025",
     overview: "Performed vehicle instrumentation, DAQ integration, and post-processing using Siemens TestLab to extract frequency response functions and vibration modes. Estimated axle cornering stiffness using nonlinear least-squares curve fitting and developed a nonlinear bicycle model in MATLAB to simulate fishhook and sine-sweep steering manoeuvres.",
     highlights: [
       "Performed vehicle instrumentation, DAQ integration, and post-processing using Siemens TestLab to extract frequency response functions, ride comfort metrics, vibration modes, and dynamic characteristics.",
@@ -307,7 +320,7 @@ const projects: Project[] = [
     team: "Individual Project",
     institution: "Clemson University (Automotive Lightweight Optimisation)",
     role: "Design & Optimization Engineer",
-    year: "2022",
+    year: "2026",
     overview: "Performed topology optimisation in HyperMesh, reducing overall deck weight while satisfying a 20 mm maximum mid-span deflection constraint. Achieved the lowest weight in the cohort and 3D-printed the final optimized model.",
     skateboardDetails: {
       images: [
@@ -364,7 +377,7 @@ const projects: Project[] = [
     teamId: "BTech-2022",
     institution: "Rajiv Gandhi Institute of Technology, Kottayam (APJ Abdul Kalam Technological University)",
     role: "Core Developer & Vehicle Dynamics Modeler",
-    year: "2021–2022",
+    year: "2021-2022",
     overview: "This final-year project tackled a real-world vehicle dynamics problem: given a race car's tunable suspension parameters (spring stiffness, anti-roll bar stiffness), can a machine learning algorithm predict the optimal setup to minimise body roll during cornering — without running thousands of physical tests? The answer was yes — and Linear Regression proved dramatically more accurate than CNN for this structured, low-dimensional dataset.",
     methodology: {
       modelling: "A Formula Student-class ATV was modelled from first principles: suspension geometry designed in SolidWorks (double-wishbone, front and rear), kinematics analysed in Lotus Shark, and the full vehicle built in IPG CarMaker with spring, damper, ARB, and kinematic data from the geometry model.",
@@ -425,7 +438,7 @@ const projects: Project[] = [
     teamId: "VB18_19087",
     institution: "Rajiv Gandhi Institute of Technology, Kottayam",
     role: "Vehicle Dynamics Head — Steering & Suspension Lead",
-    year: "2018–2019",
+    year: "2021-2022",
     overview: "Led the vehicle dynamics sub-system for a purpose-built off-road ATV built to BAJA SAE India regulations. Responsible for steering geometry, suspension kinematic design and FEA validation, and integration of the full suspension system with chassis and drivetrain. The vehicle achieved a top speed of 57.6 km/h with a kerb weight of 235 kg and competed at BAJA SAE India 2019.",
     specifications: [
       { system: "Engine", specification: "305cc 4-Stroke Gasoline, OHV, 9 HP @ 2800 RPM" },
@@ -470,11 +483,11 @@ const projects: Project[] = [
     id: "sae-aero-design",
     title: "SAE Aero Design",
     subtitle: "AeroMapper — Fixed-Wing UAV for Aerial Mapping",
-    team: "Team Pterodactyl (7 members)",
+    team: "Team Project (7 members)",
     teamId: "ADC2020170",
     institution: "Rajiv Gandhi Institute of Technology, Kottayam · Mechanical Engg. Dept.",
     role: "Aerodynamics & Structural Analysis Lead",
-    year: "2019–2020",
+    year: "2020-2021",
     overview: "Designed and built a fixed-wing UAV optimised for aerial mapping and remote sensing applications. The project spanned the full design cycle — from market study and feasibility analysis through aerodynamic sizing, structural validation, electronics integration, and flight testing.",
     problemStatement: "Design and fabricate a fixed-wing UAV capable of lifting maximum payload within strict dimensional constraints (L+W+H ≤ 170 in) using a single electric motor power plant, targeting applications in disaster management, environmental monitoring, and real-time geospatial mapping.",
     designDecisions: [
@@ -517,8 +530,314 @@ const projects: Project[] = [
     },
     cadManufacturing: "Full 3D model developed in CATIA V5R20. Wing ribs laser-cut from balsa sheet. Fuselage assembled from teak longerons with monokote skin. Hands-on build with the full team.",
     tags: ["Aerodynamics", "CFD", "ANSYS Fluent", "CATIA V5", "SAE Aero Design", "UAV", "XFLR5"],
+    aeroDesignDetails: {
+      video: {
+        src: "/project/Aero%20Design/aeroFly.mp4",
+        title: "UAV Flight Test Video"
+      },
+      images: [
+        {
+          src: "/project/Aero%20Design/aeroone.jpg",
+          alt: "Fuselage Under Construction",
+          caption: "Fuselage wooden frame under construction showing laser-cut teak and balsa members."
+        },
+        {
+          src: "/project/Aero%20Design/aerotwo.jpg",
+          alt: "Wing Ribs & Spar Alignment",
+          caption: "Laser-cut balsa wood wing ribs aligned along the aluminum spar over the design blueprint."
+        },
+        {
+          src: "/project/Aero%20Design/aerothree.jpg",
+          alt: "Wing Rib Assembly",
+          caption: "Partially assembled wing structure showcasing the high-lift aerodynamic airfoil shape."
+        },
+        {
+          src: "/project/Aero%20Design/aerofour.jpg",
+          alt: "Full UAV Skeleton",
+          caption: "Completed structural skeleton of the UAV (fuselage and wing) before covering."
+        },
+        {
+          src: "/project/Aero%20Design/aerofive.jpg",
+          alt: "Monokote Skin Application",
+          caption: "Applying the white and red Monokote heat-shrink skin onto the UAV structure."
+        },
+        {
+          src: "/project/Aero%20Design/aerosix.jpg",
+          alt: "UAV Flight Prep",
+          caption: "Final checks and electronics integration on the fully-skinned AeroMapper UAV."
+        },
+        {
+          src: "/project/Aero%20Design/aeroseven.jpg",
+          alt: "Completed AeroMapper UAV",
+          caption: "Fully assembled UAV featuring the high-wing configuration, landing gear, and power plant."
+        },
+        {
+          src: "/project/Aero%20Design/aeroeight.jpg",
+          alt: "Design & Flight Team",
+          caption: "The 7-member design, fabrication, and flight test team posing with the completed UAV."
+        }
+      ]
+    }
   }
-];
+]
+
+interface AeroGalleryProps {
+  details?: {
+    video: {
+      src: string;
+      title: string;
+    };
+    images: {
+      src: string;
+      alt: string;
+      caption: string;
+    }[];
+  };
+}
+
+const AeroVideoPlayer = ({ src, title }: { src: string; title: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleFullscreen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      }
+    }
+  };
+
+  const handleVideoEnded = () => {
+    setIsPlaying(false);
+  };
+
+  return (
+    <div 
+      className="relative group rounded-2xl overflow-hidden border border-border bg-black shadow-lg aspect-video w-full max-w-3xl mx-auto"
+      onMouseEnter={() => setShowControls(true)}
+      onMouseLeave={() => isPlaying && setShowControls(false)}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover cursor-pointer"
+        onClick={togglePlay}
+        onEnded={handleVideoEnded}
+        playsInline
+      />
+      
+      {/* Dark Overlay when paused or hovered */}
+      <div 
+        className={`absolute inset-0 bg-black/30 transition-opacity duration-300 cursor-pointer flex items-center justify-center ${
+          isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+        }`}
+        onClick={togglePlay}
+      >
+        {/* Large Play/Pause Button in the center */}
+        <button
+          className="w-16 h-16 rounded-full bg-primary/95 text-primary-foreground flex items-center justify-center shadow-xl transform transition hover:scale-110 active:scale-95 duration-200"
+          onClick={(e) => {
+            e.stopPropagation();
+            togglePlay();
+          }}
+        >
+          {isPlaying ? (
+            <Pause className="w-8 h-8 fill-current" />
+          ) : (
+            <Play className="w-8 h-8 fill-current translate-x-0.5" />
+          )}
+        </button>
+      </div>
+
+      {/* Bottom Controls Bar */}
+      <div 
+        className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent flex items-center justify-between transition-opacity duration-300 ${
+          showControls || !isPlaying ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={togglePlay} 
+            className="text-white hover:text-primary transition-colors"
+          >
+            {isPlaying ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current" />}
+          </button>
+          <span className="text-xs font-mono text-white/90 font-medium">{title}</span>
+        </div>
+        
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={toggleMute} 
+            className="text-white hover:text-primary transition-colors"
+          >
+            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          </button>
+          <button 
+            onClick={handleFullscreen} 
+            className="text-white hover:text-primary transition-colors"
+          >
+            <Maximize className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AeroGallery = ({ details }: AeroGalleryProps) => {
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+
+  if (!details) return null;
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (activeImageIndex !== null) {
+      setActiveImageIndex((prev) => 
+        prev === 0 ? details.images.length - 1 : prev! - 1
+      );
+    }
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (activeImageIndex !== null) {
+      setActiveImageIndex((prev) => 
+        prev === details.images.length - 1 ? 0 : prev! + 1
+      );
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* Video Section */}
+      <div className="space-y-3">
+        <h4 className="text-base sm:text-lg font-bold flex items-center gap-2">
+          <Play className="w-5 h-5 text-primary" />
+          Flight Test Video
+        </h4>
+        <AeroVideoPlayer src={details.video.src} title={details.video.title} />
+      </div>
+
+      <hr className="border-border" />
+
+      {/* Image Grid Section */}
+      <div className="space-y-4">
+        <h4 className="text-base sm:text-lg font-bold flex items-center gap-2">
+          <Layers className="w-5 h-5 text-primary" />
+          Project Photo Gallery
+        </h4>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {details.images.map((img, idx) => (
+            <div 
+              key={idx} 
+              className="group flex flex-col justify-between border border-border rounded-xl p-3 bg-card hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+              onClick={() => setActiveImageIndex(idx)}
+            >
+              <div className="overflow-hidden rounded-lg border bg-muted mb-3 aspect-[4/3] flex items-center justify-center relative">
+                <img 
+                  src={img.src} 
+                  alt={img.alt} 
+                  className="max-h-full max-w-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 bg-black/70 text-white text-xs font-mono py-1 px-2.5 rounded-full backdrop-blur-sm transition-opacity duration-300">
+                    View Fullscreen
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h5 className="font-bold text-xs text-foreground mb-0.5">{img.alt}</h5>
+                <p className="text-[10px] sm:text-[11px] text-muted-foreground leading-normal">{img.caption}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox Modal */}
+      {activeImageIndex !== null && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-[100] flex flex-col items-center justify-center p-4 md:p-8 animate-fade-in"
+          onClick={() => setActiveImageIndex(null)}
+        >
+          {/* Close Button */}
+          <button 
+            className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm transition-all z-[110]"
+            onClick={() => setActiveImageIndex(null)}
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Left Navigation */}
+          <button 
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-sm transition-all z-[110]"
+            onClick={handlePrev}
+          >
+            <span className="sr-only">Previous</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+
+          {/* Right Navigation */}
+          <button 
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-sm transition-all z-[110]"
+            onClick={handleNext}
+          >
+            <span className="sr-only">Next</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+          </button>
+
+          {/* Main Image Container */}
+          <div 
+            className="relative max-w-5xl max-h-[75vh] w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src={details.images[activeImageIndex].src} 
+              alt={details.images[activeImageIndex].alt} 
+              className="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-300"
+            />
+          </div>
+
+          {/* Caption Container */}
+          <div 
+            className="mt-6 text-center max-w-2xl px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h5 className="text-white font-bold text-lg mb-1">{details.images[activeImageIndex].alt}</h5>
+            <p className="text-white/70 text-sm">{details.images[activeImageIndex].caption}</p>
+            <div className="text-white/40 text-xs font-mono mt-3">
+              Image {activeImageIndex + 1} of {details.images.length}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ProjectsSection = () => {
   return (
@@ -626,6 +945,7 @@ const ProjectsSection = () => {
                       <TabsTrigger value="design" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Design</TabsTrigger>
                       <TabsTrigger value="performance" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Performance</TabsTrigger>
                       <TabsTrigger value="analysis" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Analysis</TabsTrigger>
+                      <TabsTrigger value="gallery" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Flight Video & Gallery</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="overview" className="space-y-6">
@@ -742,6 +1062,10 @@ const ProjectsSection = () => {
                           {project.cadManufacturing}
                         </p>
                       </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="gallery" className="space-y-6">
+                      <AeroGallery details={project.aeroDesignDetails} />
                     </TabsContent>
                   </Tabs>
                 )}
