@@ -136,6 +136,19 @@ interface Project {
       caption: string;
     }[];
   };
+
+  // Nonlinear Vehicle Stability Control Specific fields
+  nonlinearStabilityDetails?: {
+    video: {
+      src: string;
+      title: string;
+    };
+    images: {
+      src: string;
+      alt: string;
+      caption: string;
+    }[];
+  };
 }
 
 const projects: Project[] = [
@@ -221,7 +234,6 @@ const projects: Project[] = [
       "Implemented nonlinear tire-force and state-dependent cornering stiffness models to capture realistic tire saturation behaviour.",
       "SMC outperformed FBL: demonstrated improved yaw-rate tracking and reduced control chattering through robust sliding surface design."
     ],
-    placeholderNote: "Yaw-rate tracking plots, phase portraits, control inputs, and DLC trajectory comparisons will be updated soon.",
     tags: [
       "Nonlinear Control",
       "Sliding Mode Control",
@@ -231,7 +243,90 @@ const projects: Project[] = [
       "Vehicle Dynamics",
       "7-DOF Model",
       "Clemson"
-    ]
+    ],
+    nonlinearStabilityDetails: {
+      video: {
+        src: "/project/Non%20%20Linear/VID-20260628-WA0138.mp4",
+        title: "Closed-Loop Vehicle Stability Control Simulation Run"
+      },
+      images: [
+        {
+          src: "/project/Non%20%20Linear/NL1.png",
+          alt: "Project Background & Parameters",
+          caption: "Overview of the direct yaw control study on a Class-D sedan under SWD and DLC maneuvers using MATLAB/Simulink and CarSim."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL2.png",
+          alt: "7-DOF Vehicle Plant Model",
+          caption: "Simulink block diagram of the 7-DOF vehicle dynamics model incorporating wheel kinematics, tire dynamics, and load transfer."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL3.png",
+          alt: "Feedback Linearization (FBL) Control Architecture",
+          caption: "Control block diagram for the FBL controller which linearizes the system dynamics via nominal moment cancellation."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL4.png",
+          alt: "Sliding Mode Control (SMC) Switching Condition",
+          caption: "SMC formulation defining the sliding surface based on yaw rate and heading error, utilizing a boundary layer saturation function."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL5.png",
+          alt: "Real-World Controller Implementation Considerations",
+          caption: "Accounting for actuator constraints, yaw rate saturation limits, and driver neuromuscular delays to ensure practical viability."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL6.png",
+          alt: "Tire Operating Region (SWD)",
+          caption: "Tire lateral force vs. slip angle during the Sine-With-Dwell maneuver showing linear behavior up to 3° before cornering stiffness degrades."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL7.png",
+          alt: "Tire Operating Region (DLC)",
+          caption: "Lateral tire forces under the aggressive Double Lane Change maneuver, highlighting significant nonlinear tire saturation."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL8.png",
+          alt: "Sine-With-Dwell Steering Input (FMVSS 126)",
+          caption: "Standardized steering input profile at 80 km/h used to evaluate roll and yaw stability under safety regulations."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL9.png",
+          alt: "SWD Maneuver: Yaw Rate Tracking",
+          caption: "Comparison of yaw rate tracking under SWD showing SMC's superior damping and faster settling compared to FBL."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL10.png",
+          alt: "SWD Maneuver: Control Effort",
+          caption: "Control yaw moment effort showing high-frequency chattering in the FBL controller post-dwell, while SMC settles smoothly."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL11.png",
+          alt: "DLC Maneuver: Yaw Rate Tracking",
+          caption: "Yaw rate tracking comparison during Double Lane Change at 60 km/h and 120 km/h, highlighting FBL overshooting at high speeds."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL12.png",
+          alt: "DLC Maneuver: Control Effort",
+          caption: "Required yaw moment control effort during the DLC maneuver, showing SMC's smoother transitions and lower peak chattering."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL13.png",
+          alt: "DLC Maneuver: Trajectory Tracking",
+          caption: "Vehicle path tracking comparison during DLC at 60 km/h and 120 km/h, showing the trade-offs due to tire saturation limit."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL15.png",
+          alt: "CarSim Model Validation",
+          caption: "Validation of the 7-DOF Simulink plant model and SMC controller against high-fidelity CarSim reference models."
+        },
+        {
+          src: "/project/Non%20%20Linear/NL16.png",
+          alt: "Project Conclusion",
+          caption: "Summary of results confirming SMC's superior tracking accuracy, control smoothness, and robust stability under extreme maneuvers."
+        }
+      ]
+    }
   },
 
   {
@@ -579,9 +674,9 @@ const projects: Project[] = [
       ]
     }
   }
-]
+];
 
-interface AeroGalleryProps {
+interface ProjectMediaGalleryProps {
   details?: {
     video: {
       src: string;
@@ -595,7 +690,7 @@ interface AeroGalleryProps {
   };
 }
 
-const AeroVideoPlayer = ({ src, title }: { src: string; title: string }) => {
+const ProjectVideoPlayer = ({ src, title }: { src: string; title: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -706,7 +801,7 @@ const AeroVideoPlayer = ({ src, title }: { src: string; title: string }) => {
   );
 };
 
-const AeroGallery = ({ details }: AeroGalleryProps) => {
+const ProjectMediaGallery = ({ details }: ProjectMediaGalleryProps) => {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
   if (!details) return null;
@@ -735,9 +830,9 @@ const AeroGallery = ({ details }: AeroGalleryProps) => {
       <div className="space-y-3">
         <h4 className="text-base sm:text-lg font-bold flex items-center gap-2">
           <Play className="w-5 h-5 text-primary" />
-          Flight Test Video
+          Simulation Video
         </h4>
-        <AeroVideoPlayer src={details.video.src} title={details.video.title} />
+        <ProjectVideoPlayer src={details.video.src} title={details.video.title} />
       </div>
 
       <hr className="border-border" />
@@ -749,7 +844,7 @@ const AeroGallery = ({ details }: AeroGalleryProps) => {
           Project Photo Gallery
         </h4>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
           {details.images.map((img, idx) => (
             <div 
               key={idx} 
@@ -794,7 +889,7 @@ const AeroGallery = ({ details }: AeroGalleryProps) => {
 
           {/* Left Navigation */}
           <button 
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-sm transition-all z-[110]"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-sm transition-all z-[110]"
             onClick={handlePrev}
           >
             <span className="sr-only">Previous</span>
@@ -803,7 +898,7 @@ const AeroGallery = ({ details }: AeroGalleryProps) => {
 
           {/* Right Navigation */}
           <button 
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-sm transition-all z-[110]"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-sm transition-all z-[110]"
             onClick={handleNext}
           >
             <span className="sr-only">Next</span>
@@ -1065,7 +1160,7 @@ const ProjectsSection = () => {
                     </TabsContent>
                     
                     <TabsContent value="gallery" className="space-y-6">
-                      <AeroGallery details={project.aeroDesignDetails} />
+                      <ProjectMediaGallery details={project.aeroDesignDetails} />
                     </TabsContent>
                   </Tabs>
                 )}
@@ -1715,8 +1810,89 @@ const ProjectsSection = () => {
                   </Tabs>
                 )}
 
+                {project.id === "nonlinear-stability-control" && (
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
+                    <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
+                      <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
+                      <TabsTrigger value="control-design" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Controller Design</TabsTrigger>
+                      <TabsTrigger value="vehicle-modeling" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Vehicle Modeling</TabsTrigger>
+                      <TabsTrigger value="gallery" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Simulation Video & Plots</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="overview" className="space-y-6">
+                      <div>
+                        <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
+                          <Info className="w-5 h-5 text-primary" />
+                          Project Overview
+                        </h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          {project.overview}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-base sm:text-lg font-bold mb-3">Key Highlights</h4>
+                        <ul className="space-y-3">
+                          {project.highlights?.map((highlight, idx) => (
+                            <li key={idx} className="flex gap-3 text-xs text-muted-foreground bg-secondary/15 p-3 sm:p-4 rounded-xl border border-border/50">
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-base sm:text-lg font-bold mb-3">Institution</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{project.institution}</p>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="control-design" className="space-y-6">
+                      <div className="space-y-4">
+                        <h4 className="text-base sm:text-lg font-bold">Control Architectures</h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          This project compares two nonlinear vehicle stability control strategies for yaw-rate tracking:
+                        </p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="p-4 rounded-xl border border-border bg-card shadow-sm space-y-2">
+                            <h5 className="font-bold text-primary text-xs sm:text-sm">Feedback Linearization (FBL)</h5>
+                            <p className="text-xs text-muted-foreground leading-relaxed">
+                              Relies on nominal plant moment cancellation to linearize the yaw dynamics. It uses a 2-DOF linear bicycle reference generator and applies feedforward and proportional control. Highly sensitive to model mismatches and parameter variations.
+                            </p>
+                          </div>
+                          <div className="p-4 rounded-xl border border-border bg-card shadow-sm space-y-2">
+                            <h5 className="font-bold text-primary text-xs sm:text-sm">Sliding Mode Control (SMC)</h5>
+                            <p className="text-xs text-muted-foreground leading-relaxed">
+                              A robust control method using a sliding surface designed to decay heading and yaw rate errors. Utilizes a boundary layer (saturation function) to reduce high-frequency control chattering while maintaining robustness against tire force saturation.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="vehicle-modeling" className="space-y-6">
+                      <div className="space-y-4">
+                        <h4 className="text-base sm:text-lg font-bold">7-DOF Nonlinear Vehicle Model</h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          A 7-DOF vehicle dynamics model was built in MATLAB/Simulink to represent the plant. The model captures:
+                        </p>
+                        <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground list-disc list-inside bg-secondary/15 p-4 rounded-xl border">
+                          <li><strong>Planar Motion:</strong> Longitudinal, lateral, and yaw velocities.</li>
+                          <li><strong>Wheel Kinematics:</strong> Rotational speed of all four wheels.</li>
+                          <li><strong>Tire Forces:</strong> Pure-slip lateral tire force modeled using a 2D lookup table from CarSim data, mapping lateral force as a function of vertical load and slip angle.</li>
+                          <li><strong>Load Transfer:</strong> Dynamic vertical wheel load transfer modeled as a function of longitudinal and lateral accelerations.</li>
+                        </ul>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="gallery" className="space-y-6">
+                      <ProjectMediaGallery details={project.nonlinearStabilityDetails} />
+                    </TabsContent>
+                  </Tabs>
+                )}
+
                 {/* Fallback / Standard Project Layout for Projects 5–8 */}
-                {!["sae-aero-design", "baja-sae-india", "autonomous-car-ml", "applus-idiada-tata", "truck-ride-handling", "skateboard-topology-opt"].includes(project.id) && (
+                {!["sae-aero-design", "baja-sae-india", "autonomous-car-ml", "applus-idiada-tata", "truck-ride-handling", "skateboard-topology-opt", "nonlinear-stability-control"].includes(project.id) && (
                   <div className="space-y-6">
                     <div>
                       <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
