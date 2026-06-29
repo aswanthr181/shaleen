@@ -28,7 +28,7 @@ const HeroSection = () => {
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 animate-fade-in"
               style={{ animationDelay: "0.1s" }}
             >
-              Shaleen<span className="text-gradient">Jayaraj</span>
+              Shaleen Jayaraj<span className="text-gradient"></span>
             </h1>
 
             {/* Designation */}

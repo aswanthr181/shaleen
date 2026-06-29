@@ -103,6 +103,26 @@ interface Project {
   // Generic / Placeholder fields
   highlights?: string[];
   placeholderNote?: string;
+
+  // Truck Ride & Handling Specific fields
+  truckRideHandlingDetails?: {
+    images: {
+      src: string;
+      alt: string;
+      caption: string;
+    }[];
+    highlights: string[];
+  };
+
+  // Skateboard Topology Optimization Specific fields
+  skateboardDetails?: {
+    images: {
+      src: string;
+      alt: string;
+      caption: string;
+    }[];
+    highlights: string[];
+  };
 }
 
 const projects: Project[] = [
@@ -173,55 +193,6 @@ const projects: Project[] = [
     ]
   },
 
-  // --- Academic / Grad (Clemson) ---
-  {
-    id: "truck-ride-handling",
-    title: "Ride & Handling Analysis of Trucks",
-    subtitle: "Clemson University — Vehicle Testing & Characterization",
-    team: "Individual Project",
-    institution: "Clemson University (Vehicle Testing & Characterization)",
-    role: "Vehicle Dynamics Developer",
-    year: "2021",
-    overview: "Built bicycle models for 2-axle and 3-axle trucks; performed transient handling analysis comparing understeer gradient, yaw response, and stability characteristics. Used PSD and RMS acceleration metrics to evaluate and compare ride comfort between axle configurations.",
-    highlights: [
-      "Built bicycle models for 2-axle and 3-axle trucks; performed transient handling analysis comparing understeer gradient, yaw response, and stability characteristics.",
-      "Used PSD and RMS acceleration metrics to evaluate and compare ride comfort between axle configurations."
-    ],
-    placeholderNote: "Detailed simulation results, plots, and comparative transient response metrics will be updated soon.",
-    tags: [
-      "MATLAB",
-      "Bicycle Model",
-      "Ride Model",
-      "Understeer Gradient",
-      "PSD",
-      "RMS Acceleration",
-      "Clemson"
-    ]
-  },
-  {
-    id: "skateboard-topology-opt",
-    title: "Lightweight Skateboard Design",
-    subtitle: "Clemson University — Automotive Lightweight Optimisation",
-    team: "Individual Project",
-    institution: "Clemson University (Automotive Lightweight Optimisation)",
-    role: "Design & Optimization Engineer",
-    year: "2022",
-    overview: "Performed topology optimisation in HyperMesh, reducing overall deck weight while satisfying a 20 mm maximum mid-span deflection constraint. Achieved the lowest weight in the cohort and 3D-printed the final optimized model.",
-    highlights: [
-      "Performed topology optimisation in HyperMesh, reducing overall weight while satisfying a 20 mm maximum mid-span deflection constraint.",
-      "Achieved the lowest weight among all designs in the cohort.",
-      "Designed for manufacturability and 3D-printed the final geometry."
-    ],
-    placeholderNote: "Final mass figures, topology images, FEA deformation results, and 3D print photos will be updated soon.",
-    tags: [
-      "Altair HyperMesh",
-      "3D Printing",
-      "Lightweight Design",
-      "FEM",
-      "Topology Optimisation",
-      "Clemson"
-    ]
-  },
   {
     id: "nonlinear-stability-control",
     title: "Nonlinear Vehicle Stability Control",
@@ -249,6 +220,7 @@ const projects: Project[] = [
       "Clemson"
     ]
   },
+
   {
     id: "vehicle-dynamics-tire-testing",
     title: "Vehicle Dynamics & Tire Testing",
@@ -276,6 +248,112 @@ const projects: Project[] = [
       "Clemson"
     ]
   },
+
+  // --- Academic / Grad (Clemson) ---
+  {
+    id: "truck-ride-handling",
+    title: "Ride & Handling Analysis of Trucks",
+    subtitle: "Clemson University — Vehicle Testing & Characterization",
+    team: "Individual Project",
+    institution: "Clemson University (Vehicle Testing & Characterization)",
+    role: "Vehicle Dynamics Developer",
+    year: "2021",
+    overview: "Built bicycle models for 2-axle and 3-axle trucks; performed transient handling analysis comparing understeer gradient, yaw response, and stability characteristics. Used PSD and RMS acceleration metrics to evaluate and compare ride comfort between axle configurations.",
+    truckRideHandlingDetails: {
+      images: [
+        {
+          src: "/project/Ride%20and%20Handling/rideFirst.jpg",
+          alt: "Bicycle Model & Transient Handling Response",
+          caption: "Bicycle Model Simulation & Transient Handling Response (Yaw Rate and Lateral Acceleration)"
+        },
+        {
+          src: "/project/Ride%20and%20Handling/rideSecond.jpg",
+          alt: "Understeer Gradient & Stability Characteristics",
+          caption: "Understeer Gradient & Sideslip Angle Analysis"
+        },
+        {
+          src: "/project/Ride%20and%20Handling/rideThird.jpg",
+          alt: "PSD Acceleration & Ride Comfort Analysis",
+          caption: "Power Spectral Density (PSD) of Vertical Acceleration at the seat"
+        },
+        {
+          src: "/project/Ride%20and%20Handling/rideFourth.jpg",
+          alt: "RMS Acceleration & Axle Configuration Comparison",
+          caption: "RMS Acceleration Comparison between 2-Axle and 3-Axle configurations"
+        }
+      ],
+      highlights: [
+        "Built 2-axle and 3-axle truck bicycle models from first principles in MATLAB.",
+        "Simulated step-steer and ramp-steer inputs to analyze yaw rate, sideslip angle, and lateral acceleration.",
+        "Evaluated understeer gradient to assess vehicle stability and control authority at varying speeds.",
+        "Performed power spectral density (PSD) analysis of vertical acceleration to evaluate ride comfort against ISO 2631 standards.",
+        "Compared RMS acceleration across different road profiles (Class A to Class D) and axle configurations."
+      ]
+    },
+    tags: [
+      "MATLAB",
+      "Bicycle Model",
+      "Ride Model",
+      "Understeer Gradient",
+      "PSD",
+      "RMS Acceleration",
+      "Clemson"
+    ]
+  },
+  {
+    id: "skateboard-topology-opt",
+    title: "Lightweight Skateboard Design",
+    subtitle: "Clemson University — Automotive Lightweight Optimisation",
+    team: "Individual Project",
+    institution: "Clemson University (Automotive Lightweight Optimisation)",
+    role: "Design & Optimization Engineer",
+    year: "2022",
+    overview: "Performed topology optimisation in HyperMesh, reducing overall deck weight while satisfying a 20 mm maximum mid-span deflection constraint. Achieved the lowest weight in the cohort and 3D-printed the final optimized model.",
+    skateboardDetails: {
+      images: [
+        {
+          src: "/project/Skateboard/FEA_ModelDesign.jpg",
+          alt: "FEA Model & Design Constraints",
+          caption: "Finite Element Analysis (FEA) setup and model design constraints in HyperMesh."
+        },
+        {
+          src: "/project/Skateboard/TopologyAnalysis.jpg",
+          alt: "Topology Optimization Results",
+          caption: "Material density distribution and load path visualization from topology optimization."
+        },
+        {
+          src: "/project/Skateboard/FreeShapeOptimization.jpg",
+          alt: "Free Shape Optimization",
+          caption: "Local shape optimization to minimize stress concentrations in high-stress regions."
+        },
+        {
+          src: "/project/Skateboard/ThreeDPrinted.jpg",
+          alt: "3D Printed Prototype",
+          caption: "Scale model of the optimized lightweight skateboard deck, 3D-printed to verify manufacturability."
+        },
+         {
+          src: "/project/Skateboard/shaleen.jpg",
+          alt: "",
+          caption: ""
+        }
+      ],
+      highlights: [
+        "Performed topology optimisation in HyperMesh, reducing overall weight while satisfying a 20 mm maximum mid-span deflection constraint.",
+        "Achieved the lowest weight among all designs in the cohort.",
+        "Designed for manufacturability and 3D-printed the final geometry."
+      ]
+    },
+    tags: [
+      "Altair HyperMesh",
+      "3D Printing",
+      "Lightweight Design",
+      "FEM",
+      "Topology Optimisation",
+      "Clemson"
+    ]
+  },
+  
+
 
   // --- Undergrad ---
   {
@@ -505,7 +583,7 @@ const ProjectsSection = () => {
                 </div>
               </DialogTrigger>
               
-              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full p-4 sm:p-6 md:p-8">
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto overflow-x-hidden w-[95vw] sm:w-full p-4 sm:p-6 md:p-8">
                 <DialogHeader className="space-y-1">
                   <div className="flex items-center gap-2 text-primary font-mono text-xs sm:text-sm mb-1 sm:mb-2">
                     <Layers className="w-4 h-4" />
@@ -542,7 +620,7 @@ const ProjectsSection = () => {
                 </div>
 
                 {project.id === "sae-aero-design" && (
-                  <Tabs defaultValue="overview" className="w-full">
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
                     <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
                       <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
                       <TabsTrigger value="design" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Design</TabsTrigger>
@@ -669,7 +747,7 @@ const ProjectsSection = () => {
                 )}
 
                 {project.id === "baja-sae-india" && (
-                  <Tabs defaultValue="overview" className="w-full">
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
                     <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
                       <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
                       <TabsTrigger value="chassis-suspension" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Chassis & Susp</TabsTrigger>
@@ -883,7 +961,7 @@ const ProjectsSection = () => {
                 )}
 
                 {project.id === "autonomous-car-ml" && (
-                  <Tabs defaultValue="overview" className="w-full">
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
                     <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
                       <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
                       <TabsTrigger value="methodology" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Methodology</TabsTrigger>
@@ -1074,7 +1152,7 @@ const ProjectsSection = () => {
                 )}
 
                 {project.id === "applus-idiada-tata" && (
-                  <Tabs defaultValue="overview" className="w-full">
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
                     <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
                       <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
                       <TabsTrigger value="responsibilities" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Responsibilities & Work</TabsTrigger>
@@ -1160,8 +1238,161 @@ const ProjectsSection = () => {
                   </Tabs>
                 )}
 
+                {project.id === "truck-ride-handling" && (
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
+                    <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
+                      <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
+                      <TabsTrigger value="handling" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Handling Analysis</TabsTrigger>
+                      <TabsTrigger value="ride" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Ride Comfort</TabsTrigger>
+                      <TabsTrigger value="plots" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Simulation Plots</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="overview" className="space-y-6">
+                      <div>
+                        <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
+                          <Info className="w-5 h-5 text-primary" />
+                          Project Overview
+                        </h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          {project.overview}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
+                          <Layers className="w-5 h-5 text-primary" />
+                          Key Highlights
+                        </h4>
+                        <ul className="space-y-3">
+                          {project.truckRideHandlingDetails?.highlights.map((highlight, idx) => (
+                            <li key={idx} className="flex gap-3 text-xs text-muted-foreground bg-secondary/15 p-3 sm:p-4 rounded-xl border border-border/50">
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-base sm:text-lg font-bold mb-3">Institution</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{project.institution}</p>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="handling" className="space-y-6">
+                      <div className="space-y-4">
+                        <h4 className="text-base sm:text-lg font-bold">Transient Handling & Understeer Analysis</h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          By modeling the lateral dynamics of 2-axle and 3-axle trucks, we evaluated how the addition of a third axle (tandem rear axle) affects the understeer gradient and transient response. The yaw rate and sideslip responses were simulated for step-steer inputs.
+                        </p>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="ride" className="space-y-6">
+                      <div className="space-y-4">
+                        <h4 className="text-base sm:text-lg font-bold">Ride Comfort & Power Spectral Density (PSD)</h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          Vertical dynamics were analyzed using a pitch-bounce ride model. We evaluated the Power Spectral Density (PSD) of vertical acceleration at the driver's seat over different road profiles (ISO Class A to D) to quantify human exposure to whole-body vibration.
+                        </p>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="plots" className="space-y-6">
+                      <h4 className="text-base sm:text-lg font-bold mb-4">Simulation Results Gallery</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {project.truckRideHandlingDetails?.images.map((img, idx) => (
+                          <div key={idx} className="group flex flex-col justify-between border border-border rounded-xl p-4 bg-card hover:shadow-md transition-shadow animate-fade-in">
+                            <div className="overflow-hidden rounded-lg border bg-muted mb-3 aspect-[4/3] flex items-center justify-center">
+                              <img 
+                                src={img.src} 
+                                alt={img.alt} 
+                                className="max-h-full max-w-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
+                              />
+                            </div>
+                            <div>
+                              <h5 className="font-bold text-xs sm:text-sm text-foreground mb-1">{img.alt}</h5>
+                              <p className="text-[11px] text-muted-foreground leading-normal">{img.caption}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                )}
+
+                {project.id === "skateboard-topology-opt" && (
+                  <Tabs defaultValue="overview" className="w-full min-w-0">
+                    <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none mb-6 flex-nowrap">
+                      <TabsTrigger value="overview" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Overview</TabsTrigger>
+                      <TabsTrigger value="optimization" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Optimization & FEA</TabsTrigger>
+                      <TabsTrigger value="plots" className="flex-shrink-0 flex-1 sm:flex-none text-xs sm:text-sm">Design Gallery</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="overview" className="space-y-6">
+                      <div>
+                        <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
+                          <Info className="w-5 h-5 text-primary" />
+                          Project Overview
+                        </h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          {project.overview}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
+                          <Layers className="w-5 h-5 text-primary" />
+                          Key Highlights
+                        </h4>
+                        <ul className="space-y-3">
+                          {project.skateboardDetails?.highlights.map((highlight, idx) => (
+                            <li key={idx} className="flex gap-3 text-xs text-muted-foreground bg-secondary/15 p-3 sm:p-4 rounded-xl border border-border/50">
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-base sm:text-lg font-bold mb-3">Institution</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{project.institution}</p>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="optimization" className="space-y-6">
+                      <div className="space-y-4">
+                        <h4 className="text-base sm:text-lg font-bold">Topology & Shape Optimization</h4>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          The objective of this project was to design a lightweight skateboard deck using Altair HyperMesh. By setting a 20 mm maximum mid-span deflection constraint under a standard rider weight, we ran topology optimization to identify the optimal material layout and load paths.
+                        </p>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                          Following the topology optimization, free shape optimization was conducted on the transition zones to minimize local stress concentrations, ensuring the structure remains durable while minimizing mass. The final design achieved the lowest weight in the cohort.
+                        </p>
+                      </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="plots" className="space-y-6">
+                      <h4 className="text-base sm:text-lg font-bold mb-4">Design & Optimization Gallery</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {project.skateboardDetails?.images.map((img, idx) => (
+                          <div key={idx} className="group flex flex-col justify-between border border-border rounded-xl p-4 bg-card hover:shadow-md transition-shadow animate-fade-in">
+                            <div className="overflow-hidden rounded-lg border bg-muted mb-3 aspect-[4/3] flex items-center justify-center">
+                              <img 
+                                src={img.src} 
+                                alt={img.alt} 
+                                className="max-h-full max-w-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
+                              />
+                            </div>
+                            <div>
+                              <h5 className="font-bold text-xs sm:text-sm text-foreground mb-1">{img.alt}</h5>
+                              <p className="text-[11px] text-muted-foreground leading-normal">{img.caption}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                )}
+
                 {/* Fallback / Standard Project Layout for Projects 5–8 */}
-                {!["sae-aero-design", "baja-sae-india", "autonomous-car-ml", "applus-idiada-tata"].includes(project.id) && (
+                {!["sae-aero-design", "baja-sae-india", "autonomous-car-ml", "applus-idiada-tata", "truck-ride-handling", "skateboard-topology-opt"].includes(project.id) && (
                   <div className="space-y-6">
                     <div>
                       <h4 className="flex items-center gap-2 text-base sm:text-lg font-bold mb-3">
